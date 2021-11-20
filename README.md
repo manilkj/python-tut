@@ -198,3 +198,31 @@ for turn in range(100):
       #This tells white turtle to move to a position if they win (cross a certain x position that is equivalent to the x position of the finish line).
 			break
 			#This will stop the loop (and thus the turtles moving) regardless of if they have finished the range set earlier.
+
+
+import mysql.connector
+mydb=mysql.connector.connect(host='localhost',username='root',\
+password='Mani.@12')
+mycursor=mydb.cursor()
+mycursor.execute("CREATE DATABASE k20ud") 
+
+mydb=mysql.connector.connect(host='localhost',username='root',\
+password='Mani.@12',\
+database='k20ud')
+mycursor=mydb.cursor()
+mycursor.execute("CREATE TABLE Players(id int AUTO_INCREMENT PRIMARY KEY,\
+p_name VARCHAR(50), t_color VARCHAR(100))")
+
+mycursor=mydb.cursor()
+query="INSERT INTO Players(p_name,t_color) VALUES(%s,%s)"
+data=[
+    ('ada','red'),
+    ('aaron','yellow'),
+    ('aiden','blue'),
+    ('addy','orange')
+]
+
+mycursor.executemany(query,data)
+mydb.commit()
+
+
